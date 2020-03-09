@@ -19,15 +19,22 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         </androidx.appcompat.widget.Toolbar>
+        <ProgressBar
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/post_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:visibility="gone">
 
         </androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
+
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_menu"

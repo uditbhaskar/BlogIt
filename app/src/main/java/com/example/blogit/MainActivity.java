@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     ActionBarDrawerToggle actionBarDrawerToggle;
     NavigationView navigationView;
     RecyclerView recyclerView;
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         navigationSetup();
         getData();
         recyclerView = findViewById(R.id.post_list);
+        progressBar = findViewById(R.id.progressbar);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
@@ -69,13 +73,15 @@ public class MainActivity extends AppCompatActivity {
         postList.enqueue(new Callback<PostList>() {
             @Override
             public void onResponse(Call<PostList> call, Response<PostList> response) {
+                progressBar.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
                 PostList list = response.body();
                 recyclerView.setAdapter(new PostAdapter(list.getItems(), MainActivity.this));
             }
 
             @Override
             public void onFailure(Call<PostList> call, Throwable t) {
-
+                Toast.makeText(getApplicationContext(), "Error Occured", Toast.LENGTH_SHORT).show();
             }
         });
     }

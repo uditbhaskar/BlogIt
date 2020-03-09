@@ -16,7 +16,7 @@ public class BloggerAPI {
         if(postService==null){
             Retrofit retrofit=new Retrofit.Builder()
                     .baseUrl(url)
-                    .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create()) //check manifest to use java compileOptions in gradel
                     .build();
 
             postService= retrofit.create(PostService.class);
